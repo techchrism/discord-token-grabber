@@ -1,6 +1,11 @@
 const level = require('level');
 const os = require('os');
 const path = require('path');
+const {argv} = require('yargs').option('leveldb', {
+    alias: 'l',
+    type: 'string',
+    description: 'Path to the leveldb directory'
+});
 
 function getLevelDBPath()
 {
@@ -47,7 +52,7 @@ function getToken(levelDBPath)
     });
 }
 
-getToken(getLevelDBPath()).then(token =>
+getToken(argv['leveldb'] || getLevelDBPath()).then(token =>
 {
     console.log(token);
 }).catch(err =>
