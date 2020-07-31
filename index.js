@@ -13,10 +13,15 @@ function getLevelDBPath()
     {
         return path.join(process.env['APPDATA'], 'discord', 'Local Storage', 'leveldb');
     }
+    else if (os.platform() === 'linux')
+    {
+        return path.join(process.env['HOME'], '.config', 'discord', 'Local Storage', 'leveldb');
+    }
     else
     {
         throw new Error(`Unsupported platform: ${os.platform()}`);
     }
+    
 }
 
 function getToken(levelDBPath)
